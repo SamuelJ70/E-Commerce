@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+<title>Vendor | Add Product</title>
+
+<style>
+    .custom-container {
+      display: flex;
+      align-items: center;
+      margin: 2%;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+      padding: 2%;
+      background-color: rgb(253, 249, 249);
+    }
+  
+    .custom-input {
+      margin-bottom: 10px;
+    }
+  
+    .add-product:hover {
+      background-color: rgb(9, 235, 122);
+
+    }
+
+    
+
+    
+
+  </style>
+
+{% endblock %}
+
+
+
+{% block body %}
+
+{% for message in messages %}
+
+<p style="color: green;">{{ message }}</p>
+
+{% endfor %}
+
+
+<div class="custom-container">
+    <a href="{% url 'vendor_products' %}" class="btn btn-primary go-back"> <b><--</b> Go Back to Products</a>
+    <form class="w-75 mx-auto" action="{% url 'add_product' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group row">
+            <label for="product_name" class="col-sm-2 col-form-label">Product Name</label>
+            <div class="col-sm-10">
+                <input type="text" name="product_name" class="form-control custom-input" id="product_name" required>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="product_price" class="col-sm-2 col-form-label">Price</label>
+            <div class="col-sm-10">
+                <input type="number" name="product_price" id="product_price" class="form-control custom-input" min="1" required>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="product_category" class="col-sm-2 col-form-label">Product Category</label>
+            <div class="col-sm-10">
+                <select name="product_category" id="product_category" class="form-control custom-input" required>
+                    <!--Add product category from ProductCategory models-->
+
+                    <!--Add product category from ProductCategory models-->
+                    {% for category in categories %}
+
+                    <option value={{category.category }}>{{ category.category }}</option>
+
+                    {% endfor %}
+
+
+
+                </select> <br>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="product_detail" class="col-sm-2 col-form-label">Product Details</label>
+            <div class="col-sm-10">
+                <textarea type="text" name="product_detail" id="product_detail" cols="30" rows="10"
+                    class="form-control custom-input"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="id_product_image" class="col-sm-2 col-form-label">Product Image</label>
+            <div class="col-sm-10">
+                <input type="file" name="product_image" accept="image/*" id="id_product_image"
+                    class="form-control custom-input" required>
+            </div>
+        </div>
+
+        <div class="form-group row">
+
+            <div class="col-sm-12 ">
+                <input type="submit" value="Add Product" class="form-control add-product custom-input">
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<!-- <form action="{% url 'add_product' %}" method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        <label for="product_name">Product Name</label>
+        <input type="text" name="product_name" id="product_name"> <br>
+
+        <label for="product_price">Product Price</label>
+        <input type="text" name="product_price" id="product_price"> <br>
+        
+        <label for="product_category">Choose a Product Category:</label>
+        <select name="product_category" id="product_category"> -->
+<!--Add product category from ProductCategory models-->
+<!-- {% for category in categories %}
+
+          <option value={{category.category }}>{{ category.category }}</option>
+
+         {% endfor %}
+        </select> <br>
+
+        <label for="product_detail">Product Details</label>
+        <textarea name="product_detail" id="product_detail" cols="30" rows="10"></textarea> <br>
+
+        <label for="id_product_image">Proudct Image</label>
+          
+        <input type="file" name="product_image" accept="image/*" required="" id="id_product_image"> <br>
+
+        <input type="submit" value="Add Product">
+
+    </form> -->
+
+
+
+
+
+
+
+
+{% endblock %}

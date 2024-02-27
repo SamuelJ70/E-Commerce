@@ -1,0 +1,175 @@
+{% extends './base.html' %}
+
+
+{% block head %}
+
+<title>User | shop explore</title>
+<style>
+  .custom-image-styles {
+    width: 250px;
+    padding: 10px;
+    height: 250px;
+
+
+
+  }
+
+
+  .image-background {
+    background-color: rgb(225, 225, 92);
+  }
+</style>
+
+{% endblock %}
+
+
+
+
+
+{% block body %}
+{% include './nav.html' %}
+
+
+{% if messages %}
+
+{% for message in messages %}
+<p style="color: green;">{{message}}</p>
+{% endfor %}
+
+{% endif %}
+
+{% for product in cart %}
+
+
+<div class="card mb-3 mx-auto" style="max-width: 70%;">
+  <div class="row g-0">
+    <div class="col-md-4 image-background">
+      <img src="/media/{{ product.product.product_image}}"
+        class="img-fluid rounded-start custom-image-styles card-img-top mx-auto d-block text-center" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.product.product_name }}</h5>
+        <p class="card-text">{{ product.product.product_price }}</p>
+        <p class="in-stock">In stock : {{ product.product.product_quantity }}</p>
+        <p style="display: inline;">Quantity : </p>
+        <button class="add-quantity">+</button>
+
+        <p style="display: inline;" class="quantity">1</p>
+
+        <button class="remove-quantity">-</button>
+
+        <p id="stock-left" style="display: none;">{{ product.product.product_quantity }}</p>
+
+        <a class="btn btn-danger" href="{% url 'remove_item' product.product.product_name %}" role="button"
+          style="display: block;margin: 10px;margin-left: 0%; ">Remove from cart</a>
+
+
+        <a class="btn btn-success checkout" href="{% url 'checkout' product.product.product_name ' ' %}" role="button"
+          style="display: block;margin: 10px;margin-left: 0%;">Proceed
+          to checkout</a>
+
+
+
+
+
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+{% empty %}
+<p>No items in the cart</p>
+
+{% endfor %}
+
+
+<script>
+
+  //Incrementing the value  
+
+  var incrementButtons = document.querySelectorAll(".add-quantity");
+  // console.log(incrementButtons)
+  for (let i = 0; i < incrementButtons.length; i++) {
+    let button = incrementButtons[i]
+    button.addEventListener("click", function (event) {
+      // console.log(event.target)
+      let clickedButton = event.target;
+
+      //getting the paragraph in which the quantity is written
+      let input = clickedButton.parentElement.children[5]
+
+      // console.log(clickedButton.parentElement.children[7].innerHTML)
+      if (parseInt(input.innerHTML) < parseInt(clickedButton.parentElement.children[7].innerHTML)) {
+        input.innerHTML = parseInt(input.innerHTML) + 1
+      }
+
+      else {
+        alert("No stocks left")
+      }
+
+
+
+    })
+  }
+
+  //end of incrementing the value
+
+  var decrementButtons = document.querySelectorAll(".remove-quantity");
+
+  for (let i = 0; i < decrementButtons.length; i++) {
+    let button = decrementButtons[i];
+    button.addEventListener("click", function (event) {
+
+      let clickedButton = event.target;
+
+      let input = clickedButton.parentElement.children[5]
+
+      if (parseInt(input.innerHTML) > 1) {
+        input.innerHTML = parseInt(input.innerHTML) - 1;
+      }
+      else {
+        alert("atleast 1 quantity should be in the cart")
+      }
+
+    })
+  }
+
+
+  document.querySelector('.checkout')
+
+  //end of decrementing the value
+
+  // checkoutTags = document.querySelectorAll(".checkout")
+  // for (var i = 0; i < checkoutTags.length; i++) {
+  //   var ele = checkoutTags[i]
+  //   ele.addEventListener("click", function () {
+
+  //     let url =  event.target.getAttribute("href")
+  //     let quantity = event.target 
+  //   })
+
+  // }
+
+  //Manipulating the urls
+  checkoutTags = document.querySelectorAll(".checkout")
+  for (var i = 0; i < checkoutTags.length; i++) {
+    var ele = checkoutTags[i]
+    ele.addEventListener("click", function () {
+      var parentEle = event.target.parentElement
+      let url =  event.target.getAttribute("href")
+      let quantity = parentEle.querySelector(".quantity").innerHTML
+      url = url + quantity
+      console.log(url)
+      event.target.setAttribute("href", url)
+      console.log(event.target.getAttribute("href"))
+    })
+  }
+
+</script>
+
+
+{% endblock %}

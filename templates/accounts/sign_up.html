@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+
+{% block head %}
+
+    <title>Sign up</title>
+
+{% endblock %}
+
+
+{% block body %}
+
+
+    {{ data }}
+    <h1>Sign up</h1>
+
+    <form action="{% url 'sign_up' %}" method="post">
+        {% csrf_token %}
+        <label for="first-name">First Name</label>
+        <input type="text" name="first_name" id="first-name"> <br>
+
+        <label for="last-name">Last Name</label>
+        <input type="text" name="last_name" id="last-name"> <br>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password"> <br>
+
+        <label for="phone-number" min="10" max="10">Phone number</label>
+        <input type="text" name="phone_number" id="phone-number" maxlength="10"> <br>
+        
+        <label for="pin-code">Pincode</label>
+        <input type="text" name="pin_code" id="pin-code"> <br>  
+        
+        <input type="submit" value="Sign up">
+    </form>
+
+    <p>Already have an account <a href="{% url 'login' %}">Login</a></p>
+
+{% endblock %}

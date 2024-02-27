@@ -1,0 +1,99 @@
+{% extends './base.html' %}
+
+
+{% block head %}
+
+<title>User | checkout</title>
+
+<style>
+
+</style>
+
+{% endblock %}
+
+
+
+
+
+{% block body %}
+{% include './nav.html' %}
+
+
+
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product </th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price in <i>RS</i></th>
+            <th scope="col">Total price</th>
+            <th scope="col">-</th>
+        </tr>
+    </thead>
+    <tbody>
+
+       
+
+
+        {% for product in products %}
+        <tr>
+            <th scope="row" class="row-number">{{ item_number }}</th>
+            <td>{{ product.product.product_name }}</td>
+            <td class="product-quantity">{{ product.quantity }}</td>
+            <td class="product-price">{{ product.product.product_price }}</td>
+            <td class="total-price"></td>
+           <td></td>
+            <!--product.product.product_name-->
+        </tr>
+       
+       {% endfor %}
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          
+            <td><p style="text-align: right;"></p></td>
+           <td></td>
+        <td ><p><a href="{% url 'order' %}" class="btn btn-warning" style="width:50%">Order</a></p></td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+
+    let rowElement  =   document.querySelectorAll(".row-number")
+
+        for (let i = 0; i < rowElement.length; i++){
+            rowElement[i].innerHTML = i+1
+        }
+
+
+    })
+
+    let productQuantityEle = document.querySelectorAll(".product-quantity")
+    let productPriceEle = document.querySelectorAll(".product-price")
+    let totalPriceEle = document.querySelectorAll(".total-price")
+    
+    for (let i = 0; i < productQuantityEle.length; i++){
+         
+        totalPriceEle[i].innerHTML = parseInt(productQuantityEle[i].innerHTML) * parseInt(productPriceEle[i].innerHTML)
+        
+    
+    }
+
+
+    
+
+
+    
+</script>
+
+
+
+{% endblock %}

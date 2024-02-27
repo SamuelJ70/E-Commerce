@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+    <title>Vendor | Home</title>        
+
+{% endblock %}
+
+
+{% block body %}
+
+   
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product </th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Phone number</th>
+           
+        </tr>
+    </thead>
+
+    <tbody>
+
+
+
+        
+        {% for order in orders %}
+        <tr>
+            <th scope="row" class="row-number"></th>
+            <td>{{ order.product.product_name }}</td>
+            <td class="product-quantity">{{ order.quantity }}</td>
+            <td class="product-price">{{ order.user.mobile_number }}</td>
+            
+
+            <!--product.product.product_name-->
+        </tr>
+
+        {% endfor %}
+
+        
+
+    </tbody>
+</table>
+    
+        <script>
+             document.addEventListener("DOMContentLoaded", function () {
+
+let rowElement = document.querySelectorAll(".row-number")
+
+for (let i = 0; i < rowElement.length; i++) {
+    rowElement[i].innerHTML = i + 1
+}
+
+
+})
+        </script>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+Main app consists of users data
+
+
+shop app consist of shop vendor details
+
+for the home page the views is in the MainApp app
+
+shop/Vendor refers to shop only
+
+
+sign_up - for vendor url
+
+sign_up_user - for user url

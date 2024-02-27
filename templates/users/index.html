@@ -1,0 +1,76 @@
+{% extends './base.html' %}
+
+
+
+{% block head %}
+
+    <title>DirectStore | Shoppers Home</title>
+    <style>
+        .custom-image-styles {
+            width: 250px;
+            padding: 10px;
+            height: 250px; 
+          
+            
+          
+        }
+        
+        .card:hover {
+         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .image-background {
+          background-color: rgb(225, 225, 92);
+        }
+    </style>
+
+{% endblock %}
+
+
+
+{% block body %}
+
+    
+    {% include './nav.html' %}
+
+    {% for shop in shops %}
+        <!-- <p>
+            <a href="{% url 'explore_shop' shop.mobile_number %}">
+
+                {{ shop.shop_name }}
+
+            </a>    
+            
+        
+        </p>
+
+        <p>{{ shop.pincode }}</p> -->
+        <div class="card mb-3 mx-auto" style="max-width: 70%;">
+            <div class="row g-0">
+              <div class="col-md-4 image-background" >
+                <img src="/media/{{ shop.shop_image }}" class="img-fluid rounded-start custom-image-styles card-img-top mx-auto d-block text-center" alt="No image">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h3 class="card-title"><a href="{% url 'explore_shop' shop.mobile_number %}">
+
+                    {{ shop.shop_name }}
+    
+                </a>  </h3>
+                  <p class="card-text"></p>
+                 
+                 
+                  
+                </div>
+              </div>
+        
+              
+              
+            </div>
+          </div>
+
+    {% endfor %}
+
+
+    
+{% endblock %}

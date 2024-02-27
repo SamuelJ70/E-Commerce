@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+    <title>Login</title>
+
+{% endblock %}
+
+
+{% block body %}
+
+
+    {{ data }}
+    <h1>Log in</h1>
+
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+
+        <label for="phone-number">Phone number</label>
+        <input type="text" name="phone_number" id="phone-number" maxlength="10"> <br>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password"> <br> 
+        
+        <input type="submit" value="Login">
+    </form>
+
+    <p>Don't have account? <a href="{% url 'sign_up' %}">SignUp</a></p>
+
+{% endblock %}

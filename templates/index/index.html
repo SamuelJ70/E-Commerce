@@ -1,0 +1,122 @@
+{% extends './base.html' %}
+
+
+{% block head %}
+
+<title>Direct Store</title>
+
+<style>
+    body {
+        background: rgb(255, 255, 92);
+        background: linear-gradient(-90deg, rgba(255, 255, 92, 1) 0%, rgba(255, 255, 92, 1) 34%, rgba(234, 231, 225, 1) 79%);
+    }
+
+    .text-common-properties {
+        text-align: center;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+
+    h1 {
+
+        font-weight: lighter;
+
+        font-size: 100px;
+    }
+
+    .slogon {
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .main-card {
+            margin: 20px;
+            margin-top: 40px;
+            background-color: rgb(255, 255, 92);
+            height: 50vh;
+            width: 70%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0.5, 0.5);
+        }
+
+        .customise-card {
+            margin: 20px;
+
+        }
+
+        img {
+            display: block;
+            width: 50%;
+            margin: 0 auto;
+            height: 200px;
+        }
+
+        .sign-up {
+            display: block;
+            margin: 10px;
+        }
+
+        .sign-up:hover {
+            color: rgb(255, 255, 92);
+            background-color: black;
+        }
+</style>
+{% endblock %}
+
+
+
+{% block body %}
+<h1 class="text-common-properties">Direct store</h1>
+<p class="slogon text-common-properties"></p>
+
+
+<div class="card main-card mx-auto">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card customise-card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Vendor</h3>
+                    <img src="/media/login_images/store.png">
+                    
+                    <p class="card-text"></p>
+                    <a href="{% url 'sign_up' %}" class="btn  sign-up btn-outline-warning">Sign up</a>
+                    <a href="{% url 'login' %}" class="btn  sign-up btn-outline-warning">Login</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card customise-card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Shoppers</h3>
+                    <img src="/media/login_images/shopper.png">
+                    
+                    <p class="card-text"></p>
+                    <a href="{% url 'sign_up_user' %}" class="btn btn-outline-warning sign-up">Sign up</a>
+                    <a href="{% url 'login_user' %}" class="btn btn-outline-warning  sign-up">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+
+
+    function typeWriter(element, text, i = 0) {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(() => {
+                typeWriter(element, text, i);
+            }, 50);
+        }
+    }
+
+    const el = document.querySelector(".slogon");
+    const text = "Digitisting local retailers to power the neighbourhood shopping experience!!";
+    typeWriter(el, text);
+</script>
+
+{% endblock %}

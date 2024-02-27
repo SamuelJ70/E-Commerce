@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+    <title>OTP verification | Vendor</title>
+
+{% endblock %}
+
+
+{% block body %}
+
+
+    
+    <h1>Log in</h1>
+    <div>
+        {% for message in messages %}
+        <h3 style="color: green;">{{ message }}</h3>
+        {% endfor %}
+    </div>
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <label for="mobile_number">Phone number</label>
+        <input type="text" name="mobile_number" id="mobile_number" maxlength="10"> <br>
+
+        <label for="otp">Enter OTP</label>
+        <input type="password" name="password" id="password"> <br> 
+        
+        <input type="submit" value="Login">
+    </form>
+
+    <p>Don't have account? <a href="">SignUp</a></p>
+
+{% endblock %}

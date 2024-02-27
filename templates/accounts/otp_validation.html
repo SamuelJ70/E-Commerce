@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+
+    <title>otp Verification</title>
+
+{% endblock %}
+
+
+{% block body %}
+
+    <form action="{% url 'otp_validation' %}" method="post">
+        {% csrf_token %}
+        
+        <label for="otp">Enter otp</label>
+        <input type="text" name="phone_number" value= {{ phone_number }}>
+        <input type="text" name="otp" id="otp">
+        <input type="submit" value="Verify">
+    
+    </form>
+
+{% endblock %}

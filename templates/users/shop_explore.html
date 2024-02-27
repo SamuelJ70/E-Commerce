@@ -1,0 +1,65 @@
+{% extends './base.html' %}
+
+
+{% block head %}
+
+<title>User | shop explore</title>
+
+<style>
+    .card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+</style>
+
+{% endblock %}
+
+
+
+
+
+{% block body %}
+{% include './nav.html' %}
+
+{% if messages %}
+
+{% for message in messages %}
+<p style="color: red;">{{ message }}</p>
+{% endfor %}
+
+{% endif %}
+
+
+
+<!--Start-->
+<div style="margin-top: 30px;">
+    <div class="container">
+
+        
+        <div class="row">
+            {% for product in shop_products %}
+            <div class="col-md-3">
+                <div class="card" style="width: 20rem;">
+                    <img class="card-img-top" src="/media/{{ product.product_image }}" alt="Card image"
+                        style="width:100%; height: 250px; object-fit: cover;">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ product.product_name }}</h4>
+                        <h6>Price : {{ product.product_price }}. Rs</h6>
+                        
+                        <a href="{% url 'add_to_cart' product.product_name %}" class="btn btn-primary">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <h1>no products available in this shop</h1>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+{% endblock %}
